@@ -13,4 +13,8 @@ const getOneByUsername = async (username) => {
 	return users.find((user) => user.username === username);
 };
 
-export default { create, getOneById, getOneByUsername };
+const getOneByEmail = async (email) => {
+	return users.find((user) => user.email === email);
+};
+
+export default { create, getOneById, getOneByUsername, getOneByEmail };
