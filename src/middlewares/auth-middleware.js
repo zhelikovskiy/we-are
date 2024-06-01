@@ -26,9 +26,13 @@ const authenticate = async (req, res, next) => {
 		return res.status(401).json({ message: 'Unauthorized' });
 	}
 
-	req.user = foundUser;
+	req.user = {
+		id: foundUser.id,
+		username: foundUser.username,
+		email: foundUser.email,
+	};
 
 	next();
 };
 
-export default { authenticate };
+export default authenticate;

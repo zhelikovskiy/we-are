@@ -1,8 +1,18 @@
+import * as uuid from 'uuid';
 const users = [];
 
 const create = async (user) => {
-	users.push(user);
-	return user;
+	const newUser = {
+		id: uuid.v4(),
+		username: user.username,
+		email: user.email,
+		password: user.password,
+		chats: [],
+	};
+
+	users.push(newUser);
+
+	return newUser;
 };
 
 const getOneById = async (id) => {
