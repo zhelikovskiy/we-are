@@ -8,7 +8,7 @@ const createChat = async (req, res) => {
 
 		return res.status(200).json(
 			await chatService.create({
-				creatorId: user.id,
+				creator: user.id,
 				name,
 				isPrivate,
 				password,

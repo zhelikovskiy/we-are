@@ -11,17 +11,23 @@ const chatSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
+		password: {
+			type: String,
+		},
 		creator: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',
 			required: true,
 		},
-		users: [
-			{
-				type: Schema.Types.ObjectId,
-				ref: 'User',
+		users: {
+			type: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+			validate: {
+				validator: (v) => {
+					return v.length > 0;
+				},
+				message: 'Chat must have at least one user.',
 			},
-		],
+		},
 		messages: [
 			{
 				type: Schema.Types.ObjectId,
