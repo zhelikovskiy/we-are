@@ -1,8 +1,7 @@
 import User from '../models/User.js';
 
 const create = async (user) => {
-	console.log(user);
-	const newUser = User.create({
+	const newUser = await User.create({
 		username: user.username,
 		email: user.email,
 		password: user.password,
@@ -12,11 +11,11 @@ const create = async (user) => {
 };
 
 const getOneById = async (id) => {
-	return User.findById(id);
+	return await User.findById(id);
 };
 
 const getOneByUsername = async (username) => {
-	return User.findOne({ username: username });
+	return await User.findOne({ username: username });
 };
 
 const getOneByEmail = async (email) => {
