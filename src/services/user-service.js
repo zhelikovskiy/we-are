@@ -1,30 +1,26 @@
-import * as uuid from 'uuid';
-const users = [];
+import User from '../models/User.js';
 
 const create = async (user) => {
-	const newUser = {
-		id: uuid.v4(),
+	console.log(user);
+	const newUser = User.create({
 		username: user.username,
 		email: user.email,
 		password: user.password,
-		chats: [],
-	};
-
-	users.push(newUser);
+	});
 
 	return newUser;
 };
 
 const getOneById = async (id) => {
-	return users.find((user) => user.id === id);
+	return User.findById(id);
 };
 
 const getOneByUsername = async (username) => {
-	return users.find((user) => user.username === username);
+	return User.findOne({ username: username });
 };
 
 const getOneByEmail = async (email) => {
-	return users.find((user) => user.email === email);
+	return await User.findOne({ email: email });
 };
 
 export default { create, getOneById, getOneByUsername, getOneByEmail };
