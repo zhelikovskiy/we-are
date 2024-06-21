@@ -1,16 +1,21 @@
 import Chat from '../models/Chat.js';
+import { ChatNameExistError } from '../utils/errors.js';
 
+//TODO remake mongodb error handler
 const create = async (chat) => {
-	console.log(chat);
-	const newChat = await Chat.create({
-		creator: chat.creator,
-		name: chat.name,
-		isPrivate: chat.isPrivate,
-		password: chat.password,
-		users: [chat.creator],
-	});
+	try {
+		const newChat = await Chat.create({
+			creator: chat.creator,
+			name: chat.name,
+			isPrivate: chat.isPrivate,
+			password: chat.password,
+			users: [chat.creator],
+		});
 
-	return newChat;
+		return newChat;
+	} catch (err) {
+		if (err.code === 11000) throw new ChatNameExistError();
+	}
 };
 
 const getManyByUserId = async (userId) => {

@@ -33,7 +33,13 @@ const login = async (loginData) => {
 
 	const token = await jwt.sign({ sub: user.id }, process.env.JWT_SECRET);
 
-	return { token, user };
+	const userData = {
+		id: user.id,
+		username: user.username,
+		email: user.email,
+	};
+
+	return { token, user: userData };
 };
 
 export default { register, login };

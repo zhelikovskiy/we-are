@@ -6,6 +6,7 @@ const chatSchema = new Schema(
 		name: {
 			type: String,
 			required: true,
+			unique: true,
 		},
 		isPrivate: {
 			type: Boolean,
