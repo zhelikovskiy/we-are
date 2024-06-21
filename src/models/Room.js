@@ -8,13 +8,6 @@ const roomSchema = new Schema(
 			required: true,
 			unique: true,
 		},
-		isPrivate: {
-			type: Boolean,
-			default: false,
-		},
-		password: {
-			type: String,
-		},
 		creator: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',
