@@ -1,17 +1,17 @@
 import Message from '../models/Message.js';
 
-const create = async (message) => {
-	const newMessage = await Message.create({
-		text: message.text,
-		author: message.author,
-		chat: message.chat,
+const create = async (text, authorId, roomId) => {
+	const message = await Message.create({
+		text: text,
+		author: authorId,
+		room: roomId,
 	});
 
-	return newMessage;
+	return message;
 };
 
-const getManyByChatId = async (chatId) => {
-	return await Message.find({ chat: chatId }).sort({ createdAt: -1 });
+const getManyByRoomId = async (roomId) => {
+	return await Message.find({ room: roomId }).sort({ createdAt: -1 });
 };
 
-export default { create, getManyByChatId };
+export default { create, getManyByRoomId };

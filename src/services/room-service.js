@@ -1,16 +1,15 @@
-import { P } from 'pino';
 import Room from '../models/Room.js';
 import { ChatNameExistError } from '../utils/errors.js';
 
-const create = async (creator, name) => {
+const create = async (creatorId, name) => {
 	const foundRoom = await getOneByName(name);
 
 	if (foundRoom) throw new ChatNameExistError();
 
 	const room = await Room.create({
-		creator: creator,
+		creator: creatorId,
 		name: name,
-		members: [creator],
+		members: [creatorId],
 	});
 
 	return room;
