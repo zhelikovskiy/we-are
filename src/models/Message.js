@@ -12,9 +12,9 @@ const messageSchema = new Schema(
 			ref: 'User',
 			required: true,
 		},
-		chat: {
+		room: {
 			type: Schema.Types.ObjectId,
-			ref: 'Chat',
+			ref: 'Room',
 			required: true,
 		},
 		createdAt: {

@@ -16,10 +16,10 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		chats: [
+		rooms: [
 			{
 				type: Schema.Types.ObjectId,
-				ref: 'Chat',
+				ref: 'Room',
 			},
 		],
 	},

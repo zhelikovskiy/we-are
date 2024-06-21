@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const chatSchema = new Schema(
+const roomSchema = new Schema(
 	{
 		name: {
 			type: String,
@@ -20,13 +20,13 @@ const chatSchema = new Schema(
 			ref: 'User',
 			required: true,
 		},
-		users: {
+		members: {
 			type: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 			validate: {
 				validator: (v) => {
 					return v.length > 0;
 				},
-				message: 'Chat must have at least one user.',
+				message: 'Room must have at least one member.',
 			},
 		},
 		messages: [
@@ -45,17 +45,11 @@ const chatSchema = new Schema(
 		},
 	},
 	{
-		virtuals: {
-			usersCount: {
-				get() {
-					return this.users.length;
-				},
-			},
-		},
 		versionKey: false,
+		timestamps: true,
 	}
 );
 
-const Chat = mongoose.model('Chat', chatSchema);
+const Room = mongoose.model('Room', roomSchema);
 
-export default Chat;
+export default Room;
