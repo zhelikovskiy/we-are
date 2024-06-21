@@ -29,3 +29,9 @@ export class EmailExistError extends HttpError {
 		super(400, 'EMAIL_EXIST', 'Email already exists.');
 	}
 }
+
+export class ChatNameExistError extends HttpError {
+	constructor() {
+		super(400, 'CHAT_NAME_EXIST', 'Chat name already exists.');
+	}
+}
