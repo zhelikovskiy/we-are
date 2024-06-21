@@ -8,22 +8,19 @@ import {
 	InvalidPasswordError,
 } from '../utils/errors.js';
 
-const register = async (userData) => {
-	if (await userService.getOneByUsername(userData.username))
+const register = async (username, email, password) => {
+	if (await userService.getOneByUsername(username))
 		throw new UserNameExistError();
 
-	if (await userService.getOneByEmail(userData.email))
-		throw new EmailExistError();
+	if (await userService.getOneByEmail(email)) throw new EmailExistError();
 
-	const hashedPassword = await bcrypt.hash(userData.password, 10);
-	userData.password = hashedPassword;
+	const hashedPassword = await bcrypt.hash(password, 10);
+	password = hashedPassword;
 
-	return await userService.create(userData);
+	return await userService.create({ username, email, password });
 };
 
-const login = async (loginData) => {
-	const { email, password } = loginData;
-
+const login = async (email, password) => {
 	const user = await userService.getOneByEmail(email);
 
 	if (!user) throw new UserNotFoundError();
@@ -33,13 +30,13 @@ const login = async (loginData) => {
 
 	const token = await jwt.sign({ sub: user.id }, process.env.JWT_SECRET);
 
-	const userData = {
+	const userDto = {
 		id: user.id,
 		username: user.username,
 		email: user.email,
 	};
 
-	return { token, user: userData };
+	return { token, user: userDto };
 };
 
 export default { register, login };
