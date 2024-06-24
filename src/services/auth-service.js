@@ -17,7 +17,7 @@ const register = async (username, email, password) => {
 	const hashedPassword = await bcrypt.hash(password, 10);
 	password = hashedPassword;
 
-	return await userService.create({ username, email, password });
+	return await userService.create(username, email, password);
 };
 
 const login = async (email, password) => {
@@ -28,15 +28,11 @@ const login = async (email, password) => {
 	if (!(await bcrypt.compare(password, user.password)))
 		throw new InvalidPasswordError();
 
-	const token = await jwt.sign({ sub: user.id }, process.env.JWT_SECRET);
+	const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET, {
+		expiresIn: '1h',
+	});
 
-	const userDto = {
-		id: user.id,
-		username: user.username,
-		email: user.email,
-	};
-
-	return { token, user: userDto };
+	return { token };
 };
 
 export default { register, login };
