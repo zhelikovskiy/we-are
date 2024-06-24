@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import messageController from '../controllers/message-controller.js';
-import authenticate from '../middlewares/auth-middleware.js';
+import authMiddleware from '../middlewares/auth-middleware.js';
 
-const chatRouter = Router();
+const messageRouter = Router();
 
-chatRouter.use(authenticate);
+messageRouter.use(authMiddleware);
 
-chatRouter.get('/', messageController.getMessages);
+messageRouter.post('/:roomId', messageController.sendMessage);
+messageRouter.get('/:roomId', messageController.getMessages);
 
-export default chatRouter;
+export default messageRouter;
