@@ -1,12 +1,13 @@
 import express from 'express';
 import authRouter from './routes/auth-router.js';
-import chatRouter from './routes/chat-router.js';
+import roomRouter from './routes/room-router.js';
 import messageRouter from './routes/message-router.js';
 import cors from 'cors';
 
 const app = express();
 
 app.use(express.json());
+
 app.use(
 	cors({
 		origin: ['http://localhost:3000', 'http://localhost:3001'],
@@ -16,7 +17,7 @@ app.use(
 );
 
 app.use('/api/auth', authRouter);
-app.use('/api/chats', chatRouter);
-app.use('/api/chat', messageRouter);
+app.use('/api/rooms', roomRouter);
+app.use('/api/messages', messageRouter);
 
 export default app;

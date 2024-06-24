@@ -1,7 +1,7 @@
 import * as http from 'http';
 import app from './src/app.js';
-import Socket from './src/socket.js';
-import connectDb from './src/db.js';
+import Socket from './src/utils/socket.js';
+import connectDb from './src/utils/db.js';
 
 const PORT = process.env.PORT || 3001;
 const socket = new Socket();
@@ -14,7 +14,7 @@ try {
 			console.log(`Server is running on 'http://localhost:${PORT}'`);
 		});
 
-		socket.init(server);
+		socket.initSocket(server);
 	});
 } catch (error) {
 	console.error(error);
