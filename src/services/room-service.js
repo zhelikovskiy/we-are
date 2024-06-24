@@ -1,5 +1,5 @@
 import Room from '../models/Room.js';
-import { ChatNameExistError } from '../utils/errors.js';
+import { ChatNameExistError } from '../utils/error/errors.js';
 
 const create = async (creatorId, name) => {
 	const foundRoom = await getOneByName(name);

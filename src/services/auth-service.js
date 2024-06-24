@@ -6,7 +6,7 @@ import {
 	EmailExistError,
 	UserNotFoundError,
 	InvalidPasswordError,
-} from '../utils/errors.js';
+} from '../utils/error/errors.js';
 
 const register = async (username, email, password) => {
 	if (await userService.getOneByUsername(username))

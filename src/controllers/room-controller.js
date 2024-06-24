@@ -1,5 +1,5 @@
 import roomService from '../services/room-service.js';
-import errorHandler from '../utils/errorHandler.js';
+import errorHandler from '../utils/error/errorHandler.js';
 
 const createRoom = async (req, res) => {
 	try {

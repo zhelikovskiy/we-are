@@ -1,5 +1,5 @@
 import messageService from '../services/message-service.js';
-import errorHandler from '../utils/errorHandler.js';
+import errorHandler from '../utils/error/errorHandler.js';
 
 const sendMessage = async (req, res) => {
 	try {

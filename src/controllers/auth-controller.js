@@ -1,5 +1,5 @@
 import authService from '../services/auth-service.js';
-import errorHandler from '../utils/errorHandler.js';
+import errorHandler from '../utils/error/errorHandler.js';
 
 const register = async (req, res) => {
 	try {
