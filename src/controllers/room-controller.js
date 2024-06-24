@@ -6,10 +6,7 @@ const createRoom = async (req, res) => {
 		const { name } = req.body;
 		const { user } = req;
 
-		const response = await roomService.create({
-			creator: user.id,
-			name,
-		});
+		const response = await roomService.create(user.id, name);
 
 		return res.status(200).json(response);
 	} catch (error) {

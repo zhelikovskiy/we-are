@@ -55,4 +55,12 @@ const leave = async (roomId, userId) => {
 	return room.save();
 };
 
-export default { create, join, leave, getManyByUserId, getOneById };
+const addMessage = async (roomId, messageId) => {
+	const room = await getOneById(roomId);
+
+	room.messages.push(messageId);
+
+	return room.save();
+};
+
+export default { create, join, leave, getManyByUserId, getOneById, addMessage };
