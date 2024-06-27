@@ -21,8 +21,6 @@ const authMiddleware = async (req, res, next) => {
 	try {
 		const { sub: verified } = await jwt.verify(token, process.env.JWT_SECRET);
 
-		console.log(verified);
-
 		const foundUser = await userService.getOneById(verified);
 
 		if (!foundUser) {
