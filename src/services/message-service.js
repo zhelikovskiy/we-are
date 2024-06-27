@@ -4,7 +4,7 @@ import roomService from './room-service.js';
 const create = async (text, authorId, roomId) => {
 	const message = await Message.create({
 		text: text,
-		author: authorId,
+		user: authorId,
 		room: roomId,
 	});
 
@@ -14,7 +14,9 @@ const create = async (text, authorId, roomId) => {
 };
 
 const getManyByRoomId = async (roomId) => {
-	return await Message.find({ room: roomId }).sort({ createdAt: -1 });
+	return await Message.find({ room: roomId })
+		.sort({ createdAt: -1 })
+		.populate('user', 'username');
 };
 
 export default { create, getManyByRoomId };
